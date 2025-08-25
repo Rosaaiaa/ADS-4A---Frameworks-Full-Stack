@@ -19,3 +19,22 @@ class UserController:
             "mensagem": "User salvo com sucesso",
             "usuarios": user.to_dict()
         }), 200)
+    
+    @staticmethod
+    def list_users():
+        users = UserService.list_users()
+        return make_response(jsonify({
+            "users": users
+        }), 200)
+
+    @staticmethod
+    def update_user(id):
+        data = request.get_json()
+        if not data:
+            return make_response(jsonify({"erro": "Missing update data"}), 400)
+        
+        updated_user = UserService.update_user(id, data)
+        return make_response(jsonify({
+            "mensagem": "User atualizado com sucesso",
+            "usuarios": updated_user
+        }), 200)

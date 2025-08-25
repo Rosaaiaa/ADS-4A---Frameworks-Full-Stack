@@ -4,12 +4,6 @@ import pymysql
 
 db = SQLAlchemy()
 
-conn = pymysql.connect(host='localhost', user='root', password='root')
-cursor = conn.cursor()
-cursor.execute("CREATE DATABASE IF NOT EXISTS SellerDatabase CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
-conn.commit()
-conn.close()
-
 def init_db(app):
     """
     Inicializa a base de dados com o app Flask e o SQLAlchemy.

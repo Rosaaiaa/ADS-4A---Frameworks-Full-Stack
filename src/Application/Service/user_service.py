@@ -10,3 +10,20 @@ class UserService:
         db.session.add(user)
         db.session.commit()
         return user
+    
+    @staticmethod
+    def list_users():
+        users = User.query.all()
+        user_list = []
+        for user in users:
+            user_list.append(user.to_dict())
+        return user_list
+
+    @staticmethod
+    def update_user(id, data):
+        user = User.query.get(id)
+        for chave, valor in data.items():
+            setattr(user, chave, valor)
+
+        db.session.commit()
+        return user.to_dict()

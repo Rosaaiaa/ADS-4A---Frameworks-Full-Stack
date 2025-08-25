@@ -12,5 +12,14 @@ def init_routes(app):
     def register_user():
         return UserController.register_user()
     
+    @app.route('/user', methods=['GET'])
+    def get_users():
+        users = UserController.list_users()
+        return users
+    
+    @app.route('/user/<int:id>', methods=['PUT'])
+    def update_user(id):
+        return UserController.update_user(id)
+
     
 
