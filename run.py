@@ -1,5 +1,5 @@
 from flask import Flask
-from src.config.data_base import init_db
+from src.config.data_base import init_db, db
 from src.routes import init_routes
 
 def create_app():
@@ -15,6 +15,9 @@ def create_app():
     return app
 
 app = create_app()
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
