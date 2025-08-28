@@ -20,6 +20,11 @@ def init_routes(app):
     @app.route('/user/<int:id>', methods=['PUT'])
     def update_user(id):
         return UserController.update_user(id)
+    
+    @app.route('/user/<int:id>', methods=['DELETE'])
+    def delete_user(id):
+        return UserController.delete_user(id)
+    
 
     
 

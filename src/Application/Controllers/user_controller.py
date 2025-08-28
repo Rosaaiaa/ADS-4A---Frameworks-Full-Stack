@@ -38,3 +38,14 @@ class UserController:
             "mensagem": "User atualizado com sucesso",
             "usuarios": updated_user
         }), 200)
+
+    @staticmethod
+    def delete_user(id):
+        user = UserService.delete_user(id)
+        if user == None:
+            return make_response(jsonify({
+                "mensagem": "Não existe User com esse ID"
+            }))
+        return make_response(jsonify({
+            "mensagem": "User deletado com sucesso"
+        }), 200)
