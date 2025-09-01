@@ -25,6 +25,9 @@ def init_routes(app):
     def delete_user(id):
         return UserController.delete_user(id)
     
+    @app.route('/login', methods=['POST'])
+    def login():
+        return UserController.login()
 
     
 
