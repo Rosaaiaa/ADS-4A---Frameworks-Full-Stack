@@ -12,6 +12,10 @@ def init_routes(app):
     def register_user():
         return UserController.register_user()
     
+    @app.route('/user/ativacao', methods=['POST'])
+    def ativacao_user():
+        return UserController.ativacao()
+    
     @app.route('/user', methods=['GET'])
     def get_users():
         users = UserController.list_users()

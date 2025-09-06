@@ -1,15 +1,34 @@
 from src.Domain.user import UserDomain
 from src.Infrastructure.Model.user import User
 from src.config.data_base import db 
+from ...Infrastructure.http.whats_app import gera_codigo
 
 class UserService:
     @staticmethod
     def create_user(name, cnpj, email, celular, password):
-        new_user = UserDomain(name, cnpj, email, celular, password)
-        user = User(name=new_user.name, cnpj=new_user.cnpj, email=new_user.email, celular=new_user.celular, password=new_user.password, status=new_user.status)        
+        codigo = gera_codigo()
+
+        new_user = UserDomain(name, cnpj, email, celular, password, codigo)
+        user = User(name=new_user.name, cnpj=new_user.cnpj, email=new_user.email, celular=new_user.celular, password=new_user.password, status=new_user.status, codigo=new_user.codigo)        
         db.session.add(user)
         db.session.commit()
+        
         return user
+    
+    @staticmethod
+    def verifica_codigo(id, codigo_user):
+        user = User.query.get(id)
+        if not user:
+            return False
+
+        if codigo_user == user.codigo:
+            user.status = "ativo"
+            user.codigo = None 
+            db.session.commit()
+            return True
+        else:
+            return False
+            
     
     @staticmethod
     def list_users():
@@ -36,3 +55,8 @@ class UserService:
         db.session.delete(user)
         db.session.commit()
         return user
+    
+    @staticmethod
+    def uptate_status(id):
+        user = User.query.get(id)
+        print(user)
