@@ -16,18 +16,19 @@ class UserService:
         return user
     
     @staticmethod
-    def verifica_codigo(id, codigo_user):
-        user = User.query.get(id)
+    def verifica_codigo(cnpj, codigo_user):
+        user = User.query.filter_by(cnpj=cnpj).first()
         if not user:
             return False
 
         if codigo_user == user.codigo:
-            user.status = "ativo"
+            user.status = True
             user.codigo = None 
             db.session.commit()
             return True
         else:
             return False
+
             
     
     @staticmethod

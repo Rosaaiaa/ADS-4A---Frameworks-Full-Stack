@@ -26,12 +26,13 @@ class UserController:
     @staticmethod
     def ativacao():
         data = request.get_json()
-        id = data.get("id")
+        cnpj = data.get("cnpj")
         codigo = data.get("codigo")
-        verifica_codigo = UserService.verifica_codigo(id, codigo)
+        verifica_codigo = UserService.verifica_codigo(cnpj, codigo)
         if verifica_codigo:
             return make_response(jsonify({"mensagem": "Usuário Ativado com Sucesso"}))
         return make_response(jsonify({"mensagem": "Código incorreto"}))
+
     
     @staticmethod
     def list_users():
