@@ -10,3 +10,11 @@ class UserService:
         db.session.add(user)
         db.session.commit()
         return user
+
+    @staticmethod
+    def check_login(cnpj, password):
+        user = User.query.filter_by(cnpj=cnpj, password=password).first()
+        if user:
+            user_dict = user.to_dict()
+            return user_dict['status']
+        return None
