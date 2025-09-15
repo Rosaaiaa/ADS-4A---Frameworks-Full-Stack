@@ -61,3 +61,11 @@ class UserService:
     def uptate_status(id):
         user = User.query.get(id)
         print(user)
+
+    @staticmethod
+    def check_login(cnpj, password):
+        user = User.query.filter_by(cnpj=cnpj, password=password).first()
+        if user:
+            user_dict = user.to_dict()
+            return user_dict['status']
+        return None
