@@ -12,7 +12,7 @@ def gera_codigo():
     from_='whatsapp:+14155238886',
     content_sid='HX229f5a04fd0510ce1b071852155d3e75',
     content_variables='{"1":"'+ str(numero_aleatorio) +'"}',
-    to='whatsapp:+5511965011785'
+    to='whatsapp:+5511995634027'
   )
 
   message.sid

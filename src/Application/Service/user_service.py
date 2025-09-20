@@ -5,11 +5,27 @@ from ...Infrastructure.http.whats_app import gera_codigo
 
 class UserService:
     @staticmethod
-    def create_user(name, cnpj, email, celular, password):
+    def create_user(user_data):
         codigo = gera_codigo()
-
-        new_user = UserDomain(name, cnpj, email, celular, password, codigo)
-        user = User(name=new_user.name, cnpj=new_user.cnpj, email=new_user.email, celular=new_user.celular, password=new_user.password, status=new_user.status, codigo=new_user.codigo)        
+        
+        new_user = UserDomain(
+            name=user_data['name'],
+            cnpj=user_data['cnpj'],
+            email=user_data['email'],
+            celular=user_data['celular'],
+            password=user_data['password'],
+            codigo=codigo
+        )
+        
+        user = User(
+            name=new_user.name,
+            cnpj=new_user.cnpj,
+            email=new_user.email,
+            celular=new_user.celular,
+            password=new_user.password,
+            status=new_user.status,
+            codigo=new_user.codigo
+        )
         db.session.add(user)
         db.session.commit()
         
@@ -53,7 +69,7 @@ class UserService:
         user = User.query.get(id)
         if not user:
             return None
-        db.session.delete(user)
+        user.status = False
         db.session.commit()
         return user
     
