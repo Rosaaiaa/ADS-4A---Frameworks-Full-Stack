@@ -2,7 +2,7 @@ from twilio.rest import Client
 import random
 
 def gera_codigo():
-  numero_aleatorio = random.randint(10000, 99999)
+  numero_aleatorio = random.randint(1000, 9999)
 
   account_sid = ''
   auth_token = ''
