@@ -50,6 +50,11 @@ class UserController:
         }), 200)
 
     @staticmethod
+    def get_user(id):
+        user = UserService.get_user(id)
+        return user
+
+    @staticmethod
     def update_user(id):
         data = request.get_json()
         if not data:

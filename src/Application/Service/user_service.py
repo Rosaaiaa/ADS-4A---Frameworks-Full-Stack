@@ -54,6 +54,11 @@ class UserService:
         for user in users:
             user_list.append(user.to_dict())
         return user_list
+    
+    @staticmethod
+    def get_user(id):
+        user = User.query.get(id)
+        return user.to_dict()
 
     @staticmethod
     def update_user(id, data):

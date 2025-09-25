@@ -22,6 +22,11 @@ def init_routes(app):
     def get_users():
         return UserController.list_users()
     
+    @app.route('/user/<int:id>', methods=['GET'])
+    @jwt_required()
+    def get_user_id(id):
+        return UserController.get_user(id)
+    
     @app.route('/user/<int:id>', methods=['PUT'])
     @jwt_required()
     def update_user(id):
